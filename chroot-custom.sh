@@ -1,7 +1,7 @@
 #!/bin/bash
 ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime #Time zone
 hwclock --systohc #Sync clock
-sed -i '178s/.//' /etc/locale.gen #Localization
+sed -i '393s/.//' /etc/locale.gen #Localization
 locale-gen
 echo "LANG=en_US.UTF8" >> /etc/locale.conf
 echo "arch" >> /etc/hostname #Network configuration
