@@ -8,7 +8,7 @@ echo "LANG=en_US.UTF8" >> /etc/locale.conf
 echo "arch" >> /etc/hostname #Network configuration
 echo root:admin | chpasswd
 
-pacman -S grub efibootmgr os-prober sudo polkit networkmanager xdg-user-dirs xdg-utils man-db man-pages texinfo ufw alsa-utils pipewire pipewire-alsa pipewire-jack pipewire-pulse wireplumber mesa nvidia nvidia-utils nvidia-settings
+pacman -S grub efibootmgr os-prober sudo polkit networkmanager xdg-user-dirs xdg-utils man-db man-pages texinfo ufw alsa-utils pipewire pipewire-alsa pipewire-jack pipewire-pulse wireplumber mesa nvidia-lts nvidia-utils nvidia-settings
 
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
