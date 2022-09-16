@@ -1,6 +1,6 @@
 #wm + software
 sudo timedatectl set-ntp true
-sudo pacman -S xorg xterm alacritty lightdm lightdm-gtk-greeter awesome network-manager-applet firefox vlc qbittorrent flatpak
+sudo pacman -S xorg xterm kitty lightdm lightdm-gtk-greeter awesome network-manager-applet firefox vlc qbittorrent flatpak
 
 systemctl enable lightdm.service
 
