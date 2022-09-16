@@ -22,6 +22,8 @@ ufw enable
 
 useradd -m ramon
 echo ramon:admin | chpasswd
+
+#Caps works as Esc unless also press shift
 echo "ramon ALL=(ALL) ALL" >> /etc/sudoers.d/ramon
 
 echo 'Section "InputClass"' >> /etc/X11/xorg.conf.d/00-keyboard.conf
@@ -29,3 +31,30 @@ echo '        Identifier "system-keyboard"' >> /etc/X11/xorg.conf.d/00-keyboard.
 echo '        MatchIsKeyboard "on"' >> /etc/X11/xorg.conf.d/00-keyboard.conf
 echo '        Option "XkbOptions" "caps:escape_shifted_capslock"' >> /etc/X11/xorg.conf.d/00-keyboard.conf
 echo 'EndSection' >> /etc/X11/xorg.conf.d/00-keyboard.conf
+
+#Nvidia settings
+##Set nvidia card as primary graphics provider
+echo 'Section "OutputClass"' >> /etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf
+echo '    Identifier "intel"' >> /etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf
+echo '    MatchDriver "i915"' >> /etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf
+echo '    Driver "modesetting"' >> /etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf
+echo 'EndSection' >> /etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf
+echo '' >> /etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf
+echo 'Section "OutputClass"' >> /etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf
+echo '    Identifier "nvidia"' >> /etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf
+echo '    MatchDriver "nvidia-drm"' >> /etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf
+echo '    Driver "nvidia"' >> /etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf
+echo '    Option "AllowEmptyInitialConfiguration"' >> /etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf
+echo '    Option "PrimaryGPU" "yes"' >> /etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf
+echo '    ModulePath "/usr/lib/nvidia/xorg"' >> /etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf
+echo '    ModulePath "/usr/lib/xorg/modules"' >> /etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf
+echo 'EndSection' >> /etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf
+
+#Monitor settings
+echo '#!/bin/sh' >> /etc/lightdm/display-setup.sh
+echo 'xrandr --setprovideroutputsource modesetting NVIDIA-0' >> /etc/lightdm/display-setup.sh
+echo 'xrandr --output HDMI-0 --mode 1920x1080 --auto --primary' >> /etc/lightdm/display-setup.sh
+echo 'xrandr --output eDP-1-1 --mode 1920x1080 --auto --left-of HDMI-0' >> /etc/lightdm/display-setup.sh
+
+chmod +x /etc/lightdm/display-setup.sh
+sed -ie '114s|$|display-setup-script=/etc/lightdm/display-setup.sh|' /etc/lightdm/lightdm.conf
