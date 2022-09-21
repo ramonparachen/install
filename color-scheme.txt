@@ -1,0 +1,4 @@
+1:#232526 Black-d
+2:#2C2E2F Black-l
+3:#E4E6E7 Grey
+4:#F2F4F5 Beige/White 
