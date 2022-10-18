@@ -7,9 +7,9 @@ hwclock --systohc
 sed -i 's/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/'
 sed -i 's/#pt_BR.UTF-8 UTF-8/pt_BR.UTF-8 UTF-8/'
 locale-gen
-echo "LANG=en_US.UTF8" >> /etc/locale.conf
+echo "LANG=en_US.UTF8" > /etc/locale.conf
 #Network configuration
-echo "arch" >> /etc/hostname 
+echo "arch" > /etc/hostname 
 echo root:admin | chpasswd
 
 pacman -S grub efibootmgr os-prober sudo polkit networkmanager xdg-user-dirs xdg-utils man-db man-pages texinfo ufw alsa-utils pipewire pipewire-alsa pipewire-jack pipewire-pulse wireplumber mesa nvidia-lts nvidia-utils nvidia-settings
