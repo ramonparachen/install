@@ -26,6 +26,7 @@ ufw enable
 
 useradd -m ramon
 echo ramon:admin | chpasswd
+echo "ramon ALL=(ALL) ALL" >> /etc/sudoers.d/ramon
 
 #Keyboard settings
 localectl --no-convert set-x11-keymap "us,us" "pc86" "us-intl" "caps:escape_shifted_capslock"
