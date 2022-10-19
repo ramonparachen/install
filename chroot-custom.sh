@@ -27,11 +27,5 @@ ufw enable
 useradd -m ramon
 echo ramon:admin | chpasswd
 
-#Caps works as Esc unless also press shift
-echo "ramon ALL=(ALL) ALL" >> /etc/sudoers.d/ramon
-
-echo 'Section "InputClass"' >> /etc/X11/xorg.conf.d/00-keyboard.conf
-echo '        Identifier "system-keyboard"' >> /etc/X11/xorg.conf.d/00-keyboard.conf
-echo '        MatchIsKeyboard "on"' >> /etc/X11/xorg.conf.d/00-keyboard.conf
-echo '        Option "XkbOptions" "caps:escape_shifted_capslock"' >> /etc/X11/xorg.conf.d/00-keyboard.conf
-echo 'EndSection' >> /etc/X11/xorg.conf.d/00-keyboard.conf
+#Keyboard settings
+localectl --no-convert set-x11-keymap "us,us" "pc86" "us-intl" "caps:escape_shifted_capslock"
