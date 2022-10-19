@@ -4,7 +4,6 @@ sudo pacman -S xorg xterm kitty lightdm lightdm-gtk-greeter awesome network-mana
 
 systemctl enable lightdm.service
 
-rm -rf /home/ramon/.config/awesome
-cp -r /install/.config/awesome /home/ramon/.config/
+cp -r /install/.config /home/ramon
 chmod +x /home/ramon/.config/awesome/autorun.sh
-cp /install/.vimrc /home/ramon/.vimrc
+cp /install/.vimrc /home/ramon
